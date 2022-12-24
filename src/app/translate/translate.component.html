@@ -1,5 +1,13 @@
-<div class="translate">
-    <input type="text" [(ngModel)]="textToTranslate">
+<div class="translator">
+    <div class="boxes">
+      <div class="source">
+        <h2>Bullshit job</h2>
+        <textarea [(ngModel)]="textToTranslate"></textarea>
+      </div>
+      <div class="target">
+        <h2>Real job</h2>
+        <textarea [(ngModel)]="translatedText" disabled></textarea>
+      </div>
+    </div>
     <button (click)="translate()">Translate</button>
-    <p>{{ translatedText }}</p>
-</div>
+  </div>
