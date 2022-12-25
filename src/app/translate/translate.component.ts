@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-translate',
@@ -9,22 +11,41 @@ import { HttpClient } from '@angular/common/http';
 export class TranslateComponent implements OnInit {
   textToTranslate = '';
   translatedText = '';
+  debounceTranslateSubject = new Subject<void>();
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.debounceTranslateSubject.pipe(
+      debounceTime(500)
+    ).subscribe(() => {
+      this.translate();
+    });
+  }
+
+  debounceTranslate() {
+    this.debounceTranslateSubject.next();
+  }
 
   translate() {
-    const API_KEY = 'YOUR_API_KEY';
-    const baseUrl = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+    const baseUrl = "http://localhost:3000/api/translate";
 
     const params = {
       text: this.textToTranslate
       //target: 'fr' // target language
     };
 
-    this.http.post("http://localhost:3000/api/translate", params).subscribe((response: any) => {
+    this.http.post(baseUrl, params).subscribe((response: any) => {
       this.translatedText = response.translation;
+    });
+  }
+
+  getRandomTranslation() {
+    const baseUrl = "http://localhost:3000/api/random";
+
+    this.http.post(baseUrl, {}).subscribe((response: any) => {
+      this.textToTranslate = response.translation.source;
+      this.translatedText = response.translation.target;
     });
   }
 }

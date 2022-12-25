@@ -5,17 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
 
-  constructor() { }
-
-
-  ngOnInit(): void {
-    this.activeLink = "app-root";
-  }
-
-  activeLink = "";
-  links = ["home", "app", "translate"];
-  background = "#1A8CD8";
-
+  title = 'LinkedinTranslator';
 }

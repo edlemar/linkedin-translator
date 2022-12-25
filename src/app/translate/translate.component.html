@@ -2,7 +2,7 @@
     <div class="boxes">
       <div class="source">
         <h2>Bullshit job</h2>
-        <textarea [(ngModel)]="textToTranslate"></textarea>
+        <textarea [(ngModel)]="textToTranslate" (input)="debounceTranslate()" placeholder="Type here..."></textarea>
       </div>
       <div class="target">
         <h2>Real job</h2>
@@ -10,4 +10,11 @@
       </div>
     </div>
     <button (click)="translate()">Translate</button>
+    <button (click)="getRandomTranslation()">Random job position</button>
+    <div class="disclaimer-left">
+        Note: this is pure fiction. Yet, sometimes you will find it matches the reality
+      </div>
+    <div class="disclaimer-right">
+        Done with sense of humor <span role="img" aria-label="laughing emoji">😂</span> and love <span role="img" aria-label="heart emoji">❤️</span>
+      </div>
   </div>

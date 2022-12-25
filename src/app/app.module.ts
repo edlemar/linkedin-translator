@@ -10,16 +10,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { FileUploadComponent } from './utils/file-upload/file-upload.component';
 import { TranslateComponent } from './translate/translate.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    FileUploadComponent,
     TranslateComponent
   ],
   imports: [
