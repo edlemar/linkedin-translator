@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { TranslationService } from '../services/translation.service';
 
 @Component({
   selector: 'app-translate',
@@ -12,8 +13,10 @@ export class TranslateComponent implements OnInit {
   textToTranslate = '';
   translatedText = '';
   debounceTranslateSubject = new Subject<void>();
+  baseUrl = '';
+  translation: { source: string; target: string };
 
-  constructor(private http: HttpClient) { }
+  constructor(private translationService: TranslationService) { };
 
   ngOnInit() {
     this.debounceTranslateSubject.pipe(
@@ -28,24 +31,12 @@ export class TranslateComponent implements OnInit {
   }
 
   translate() {
-    const baseUrl = "http://localhost:3000/api/translate";
-
-    const params = {
-      text: this.textToTranslate
-      //target: 'fr' // target language
-    };
-
-    this.http.post(baseUrl, params).subscribe((response: any) => {
-      this.translatedText = response.translation;
-    });
+    this.translatedText = this.translationService.translate(this.textToTranslate);
   }
 
   getRandomTranslation() {
-    const baseUrl = "http://localhost:3000/api/random";
-
-    this.http.post(baseUrl, {}).subscribe((response: any) => {
-      this.textToTranslate = response.translation.source;
-      this.translatedText = response.translation.target;
-    });
+    const translation = this.translationService.random();
+    this.textToTranslate = translation.source;
+    this.translatedText = translation.target;
   }
 }
