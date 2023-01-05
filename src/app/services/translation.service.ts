@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as levenshtein from 'levenshtein';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +10,10 @@ import * as levenshtein from 'levenshtein';
 export class TranslationService {
     translations: Object;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
+      const url = this.router.createUrlTree(['assets', 'translations.json']).toString();
       // Read the translations file from the assets folder using the HttpClient
-    this.http.get('/assets/translations.json').subscribe(translations => {
+    this.http.get(url).subscribe(translations => {
         this.translations = translations;
       });
     }
