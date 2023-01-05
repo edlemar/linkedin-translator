@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as fs from 'fs';
 import * as levenshtein from 'levenshtein';
 
 @Injectable({
@@ -38,7 +37,7 @@ export class TranslationService {
           translation = this.translations[key];
         }
       }
-      if (minDistance >= 3) {
+      if (minDistance >= 3 || minDistance == Infinity) {
         translation = 'Translation not found';
       }
     }
