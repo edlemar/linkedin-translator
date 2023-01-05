@@ -32,9 +32,6 @@ MIT
 @angular/core
 MIT
 
-@angular/forms
-MIT
-
 @angular/material
 MIT
 The MIT License
@@ -65,9 +62,6 @@ MIT
 
 @angular/router
 MIT
-
-levenshtein
-Public Domain
 
 rxjs
 Apache-2.0
