@@ -31,8 +31,13 @@ export class TranslateComponent implements OnInit {
   }
 
   translate() {
-    this.translatedText = this.translationService.translate(this.textToTranslate);
+    try {
+      this.translatedText = this.translationService.translate(this.textToTranslate);
+    } catch (error) {
+      this.translatedText = "Translation not found";
+    }
   }
+
 
   getRandomTranslation() {
     const translation = this.translationService.random();
